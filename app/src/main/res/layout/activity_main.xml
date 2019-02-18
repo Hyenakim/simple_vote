@@ -1,19 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/vote_title"
+        android:hint="투표 제목"/>
 
-</android.support.constraint.ConstraintLayout>
+    <RadioGroup
+        android:id="@+id/select_vote_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/vote_title">
+
+        <RadioButton
+            android:id="@+id/vote_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="텍스트"
+            />
+
+        <RadioButton
+            android:id="@+id/vote_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/vote_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/select_vote_type"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="항목 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="항목 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="항목 입력"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill_vertical"
+            android:text="+ 항목 추가"/>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/select_vote_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/vote_context">
+
+        <RadioButton
+            android:id="@+id/vote_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마감시간 설정"
+            />
+        <RadioButton
+            android:id="@+id/vote_multi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="복수선택" />
+        <RadioButton
+            android:id="@+id/vote_anonymous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="익명투표" />
+        <RadioButton
+            android:id="@+id/vote_permitAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택항목 추가 허용" />
+    </RadioGroup>
+</RelativeLayout>
