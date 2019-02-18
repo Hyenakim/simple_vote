@@ -10,4 +10,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:colorControlNormal">@color/background</item>
+        <item name="android:colorControlActivated">@color/background</item>
+        <item name="android:textCursorDrawable">@color/background</item>
+    </style>
+
 </resources>

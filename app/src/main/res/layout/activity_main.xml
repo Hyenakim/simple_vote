@@ -4,87 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/vote_title"
-        android:hint="투표 제목"/>
-
-    <RadioGroup
-        android:id="@+id/select_vote_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/vote_title">
-
-        <RadioButton
-            android:id="@+id/vote_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="텍스트"
-            />
-
-        <RadioButton
-            android:id="@+id/vote_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="날짜" />
-    </RadioGroup>
-
     <LinearLayout
-        android:id="@+id/vote_context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/select_vote_type"
-        android:orientation="vertical">
+        android:background="@drawable/border"
+        android:id="@+id/title">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="항목 입력"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="항목 입력"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="항목 입력"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="fill_vertical"
-            android:text="+ 항목 추가"/>
+            android:id="@+id/vote_title"
+            android:layout_margin="5dp"
+            android:theme="@style/EditTextStyle"
+            style="@style/EditTextStyle"
+            android:hint="투표 제목"/>
     </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/select_vote_option"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/context"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/title"
         android:orientation="vertical"
-        android:layout_below="@+id/vote_context">
+        android:background="@drawable/border">
+        <RadioGroup
+            android:id="@+id/select_vote_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <RadioButton
+            <RadioButton
+                android:id="@+id/vote_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio"
+                android:padding="10dp"
+                android:checked="true"
+                android:text="텍스트"
+                />
+
+            <RadioButton
+                android:id="@+id/vote_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio"
+                android:padding="10dp"
+                android:text="날짜" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/vote_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/input_border"
+                android:layout_marginBottom="5dp">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:theme="@style/EditTextStyle"
+                    style="@style/EditTextStyle"
+                    android:hint="항목 입력"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selectimage"
+                    android:background="@null"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    tools:ignore="ContentDescription"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/input_border"
+                android:layout_marginBottom="5dp">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:theme="@style/EditTextStyle"
+                    style="@style/EditTextStyle"
+                    android:hint="항목 입력"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selectimage"
+                    android:background="@null"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/input_border"
+                android:layout_marginBottom="5dp">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:theme="@style/EditTextStyle"
+                    style="@style/EditTextStyle"
+                    android:hint="항목 입력"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selectimage"
+                    android:background="@null"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/input_border"
+                android:layout_marginBottom="5dp">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="fill_vertical"
+                    android:background="@null"
+                    android:padding="1dp"
+                    android:drawableLeft="@drawable/addtext"
+                    android:text="항목 추가"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/option"
+        android:layout_below="@+id/context"
+        android:orientation="vertical">
+
+        <CheckedTextView
             android:id="@+id/vote_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="마감시간 설정"
-            />
-        <RadioButton
+            android:checkMark="@drawable/checkbox"
+            android:gravity="center"
+            android:drawableLeft="@drawable/time"
+            android:background="@drawable/border"
+            android:padding="5dp"
+            android:text="마감시간 설정" />
+        <CheckedTextView
             android:id="@+id/vote_multi"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checkMark="@drawable/checkbox"
+            android:drawableLeft="@drawable/multi"
+            android:gravity="center"
+            android:background="@drawable/border"
+            android:padding="5dp"
             android:text="복수선택" />
-        <RadioButton
+        <CheckedTextView
             android:id="@+id/vote_anonymous"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checkMark="@drawable/checkbox"
+            android:drawableLeft="@drawable/anonymous"
+            android:padding="5dp"
+            android:gravity="center"
+            android:background="@drawable/border"
             android:text="익명투표" />
-        <RadioButton
+        <CheckedTextView
             android:id="@+id/vote_permitAdd"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checkMark="@drawable/checkbox"
+            android:drawableLeft="@drawable/permitadd"
+            android:gravity="center"
+            android:background="@drawable/border"
+            android:padding="5dp"
             android:text="선택항목 추가 허용" />
-    </RadioGroup>
+    </LinearLayout>
 </RelativeLayout>
