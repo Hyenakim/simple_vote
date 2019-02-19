@@ -25,6 +25,7 @@
             android:hint="투표 제목"
             android:layout_weight="9"/>
         <Button
+            android:id="@+id/vote_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="완료"

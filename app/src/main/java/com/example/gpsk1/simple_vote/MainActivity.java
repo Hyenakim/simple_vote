@@ -1,5 +1,6 @@
 package com.example.gpsk1.simple_vote;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -39,11 +40,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         createExampleList();
         buildRecyclerView();
+        title = findViewById(R.id.vote_title);
+        finish = findViewById(R.id.vote_finish);
         addList = findViewById(R.id.add_context);
 
+        finish.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),VoteActivity.class);
+                startActivity(intent);
+            }
+        });
         addList.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -56,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void insertItem(int position){
-        mExampleList.add(position, new ExampleItem("항목 입력",String.valueOf(R.drawable.selectimage)));
+        mExampleList.add(position, new ExampleItem());
         mAdapter.notifyItemInserted(position);
     }
     public void createExampleList() {
         mExampleList = new ArrayList<>();
-        mExampleList.add(new ExampleItem("항목 입력",String.valueOf(R.drawable.selectimage)));
-        mExampleList.add(new ExampleItem("항목 입력",String.valueOf(R.drawable.selectimage)));
-        mExampleList.add(new ExampleItem("항목 입력",String.valueOf(R.drawable.selectimage)));
+        mExampleList.add(new ExampleItem());
+        mExampleList.add(new ExampleItem());
+        mExampleList.add(new ExampleItem());
     }
 
     public void buildRecyclerView() {
@@ -71,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ExampleAdapter(mExampleList);
+
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
