@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"  >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,25 +14,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
+        android:orientation="horizontal"
         android:id="@+id/title">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/vote_title"
-            android:layout_margin="5dp"
             android:theme="@style/EditTextStyle"
             style="@style/EditTextStyle"
-            android:hint="투표 제목"/>
+            android:hint="투표 제목"
+            android:layout_weight="9"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="완료"
+            android:background="@null"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/context"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         android:layout_below="@+id/title"
         android:orientation="vertical"
         android:background="@drawable/border">
@@ -59,9 +69,8 @@
         </RadioGroup>
 
         <LinearLayout
-            android:id="@+id/vote_context"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,22 +138,23 @@
                     android:layout_gravity="center"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/input_border"
-                android:layout_marginBottom="5dp">
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="fill_vertical"
-                    android:background="@null"
-                    android:padding="1dp"
-                    android:drawableLeft="@drawable/addtext"
-                    android:text="항목 추가"/>
-            </LinearLayout>
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/vote_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+        <Button
+            android:id="@+id/add_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill_vertical"
+            android:background="@drawable/input_border"
+            android:padding="1dp"
+            android:drawableLeft="@drawable/addtext"
+            android:text="항목 추가"/>
     </LinearLayout>
 
     <LinearLayout
@@ -158,17 +168,18 @@
             android:id="@+id/vote_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkMark="@drawable/checkbox"
+            android:checkMark="@drawable/selectoption"
             android:gravity="center"
             android:drawableLeft="@drawable/time"
             android:background="@drawable/border"
             android:padding="5dp"
+
             android:text="마감시간 설정" />
         <CheckedTextView
             android:id="@+id/vote_multi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkMark="@drawable/checkbox"
+            android:checkMark="@drawable/selectoption"
             android:drawableLeft="@drawable/multi"
             android:gravity="center"
             android:background="@drawable/border"
@@ -178,7 +189,7 @@
             android:id="@+id/vote_anonymous"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkMark="@drawable/checkbox"
+            android:checkMark="@drawable/selectoption"
             android:drawableLeft="@drawable/anonymous"
             android:padding="5dp"
             android:gravity="center"
@@ -188,7 +199,7 @@
             android:id="@+id/vote_permitAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkMark="@drawable/checkbox"
+            android:checkMark="@drawable/selectoption"
             android:drawableLeft="@drawable/permitadd"
             android:gravity="center"
             android:background="@drawable/border"
@@ -196,3 +207,4 @@
             android:text="선택항목 추가 허용" />
     </LinearLayout>
 </RelativeLayout>
+</ScrollView>
