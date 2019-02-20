@@ -1,12 +1,14 @@
 package com.example.gpsk1.simple_vote;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private EditText title;
 
     private Button finish;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckedTextView multi;
     private CheckedTextView anonymous;
     private CheckedTextView permitadd;
+
+    private int id=3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void insertItem(int position){
-        mExampleList.add(position, new ExampleItem());
+        mExampleList.add(position, new ExampleItem(id++));
         mAdapter.notifyItemInserted(position);
     }
     public void createExampleList() {
         mExampleList = new ArrayList<>();
-        mExampleList.add(new ExampleItem());
-        mExampleList.add(new ExampleItem());
-        mExampleList.add(new ExampleItem());
+        mExampleList.add(new ExampleItem(0));
+        mExampleList.add(new ExampleItem(1));
+        mExampleList.add(new ExampleItem(2));
     }
 
     public void buildRecyclerView() {
@@ -85,5 +90,17 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //이미지 저장
+        Log.i(TAG,String.valueOf(requestCode));
+        mExampleList.get(requestCode).setItemImageUri(data.getData().toString());
+        //이미지 받아서 띄우기
+        //mAdapter.
+        mAdapter.notifyDataSetChanged();
+
     }
 }
