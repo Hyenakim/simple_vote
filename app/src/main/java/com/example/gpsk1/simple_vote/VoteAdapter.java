@@ -5,6 +5,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,9 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull VoteViewHolder holder, int position) {
-        if(mExampleList.get(position).getItemContext()!=null)
+        if(!mExampleList.get(position).getItemContext().isEmpty()) {
             holder.button.setText(mExampleList.get(position).getItemContext());
+        }
         if(mExampleList.get(position).getItemImageUri() != null) {
             Uri uri = Uri.parse(mExampleList.get(position).getItemImageUri());
             holder.image.setImageURI(uri);
@@ -41,7 +43,12 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
 
     @Override
     public int getItemCount() {
-        return mExampleList.size();
+        int cnt=0;
+        for(int i=0;i<mExampleList.size();i++){
+            if(!mExampleList.get(i).getItemContext().isEmpty() || mExampleList.get(i).getItemImageUri() !=null)
+                cnt++;
+        }
+        return cnt;
     }
 
     public static class VoteViewHolder extends RecyclerView.ViewHolder{

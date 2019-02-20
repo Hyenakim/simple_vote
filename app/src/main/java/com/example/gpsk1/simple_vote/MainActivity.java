@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),VoteActivity.class);
+                intent.putExtra("title",title.getText().toString());
                 startActivity(intent);
             }
         });

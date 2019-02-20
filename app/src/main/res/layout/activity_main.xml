@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:orientation="horizontal"
-        android:id="@+id/title">
+        android:id="@+id/top">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:paddingBottom="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/top"
         android:orientation="vertical"
         android:background="@drawable/border">
         <RadioGroup
@@ -68,7 +68,7 @@
                 android:padding="10dp"
                 android:text="날짜" />
         </RadioGroup>
-        
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vote_context"
             android:layout_width="match_parent"

@@ -17,14 +17,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="9"
             android:theme="@style/EditTextStyle"
+            android:layout_gravity="center"
             style="@style/EditTextStyle"
             android:hint="항목 입력"/>
         <ImageButton
             android:id="@+id/input_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
             android:src="@drawable/selectimage"
             android:background="@null"
+            android:scaleType="centerInside"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="1"/>

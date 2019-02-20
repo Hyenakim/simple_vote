@@ -6,7 +6,7 @@ import android.text.Editable;
 public class ExampleItem {
     private String item_context;
     private String item_iamgeUri;
-    private int id = 0;
+    private int id;
 
     public ExampleItem(){
 
