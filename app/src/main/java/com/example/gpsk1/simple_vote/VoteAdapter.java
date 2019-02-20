@@ -59,7 +59,6 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
             super(itemView);
             button= itemView.findViewById(R.id.item_context);
             image = itemView.findViewById(R.id.item_img);
-
         }
 
     }

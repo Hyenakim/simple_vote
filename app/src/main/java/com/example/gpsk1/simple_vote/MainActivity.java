@@ -96,12 +96,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode != RESULT_OK){
+        if(resultCode != RESULT_OK){
             //이미지 로드 취소
             return;
         }
         //이미지 저장
-        Log.i(TAG,String.valueOf(requestCode));
+        Log.i(TAG, String.valueOf(requestCode));
         mExampleList.get(requestCode).setItemImageUri(data.getData().toString());
         //이미지 받아서 띄우기
         mAdapter.notifyDataSetChanged();
