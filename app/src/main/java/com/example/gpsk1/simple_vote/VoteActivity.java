@@ -41,7 +41,6 @@ public class VoteActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new VoteAdapter(mExampleList);
-        Log.i("VoteActivity",String.valueOf(mExampleList.size()));
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }

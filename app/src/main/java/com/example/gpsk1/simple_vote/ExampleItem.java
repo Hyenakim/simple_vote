@@ -30,9 +30,13 @@ public class ExampleItem {
     }
     public void setId(int id){this.id = id;}
     public String getItemContext(){
+        if(this.item_context == null)
+            return null;
         return this.item_context;
     }
     public String getItemImageUri(){
+        if(this.item_iamgeUri == null)
+            return null;
         return this.item_iamgeUri;
     }
     public int getId() {return this.id;}

@@ -18,9 +18,24 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
 
     public static ArrayList<ExampleItem> mExampleList;
     public static Context mContext;
+    public static ExampleAdapter mAdapter;
 
     public VoteAdapter(ArrayList<ExampleItem> exampleList){
         mExampleList = exampleList;
+        mAdapter = new ExampleAdapter(mExampleList);
+        if(mExampleList.size() > 2) {
+            for (int i = 0; i < mExampleList.size(); i++) {
+                if (mExampleList.get(i).getItemContext() == null
+                        && mExampleList.get(i).getItemImageUri() == null) {
+                    mExampleList.remove(i);
+                    i--;
+                    for(int j=i;j<mExampleList.size();j++){
+                        mExampleList.get(j).setId(mExampleList.get(j).getId()-1);
+                    }
+                }
+            }
+            mAdapter.notifyDataSetChanged();
+        }
     }
     @NonNull
     @Override
@@ -32,7 +47,7 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull VoteViewHolder holder, int position) {
-        if(!mExampleList.get(position).getItemContext().isEmpty()) {
+        if(mExampleList.get(position).getItemContext() != null) {
             holder.button.setText(mExampleList.get(position).getItemContext());
         }
         if(mExampleList.get(position).getItemImageUri() != null) {
@@ -43,12 +58,7 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
 
     @Override
     public int getItemCount() {
-        int cnt=0;
-        for(int i=0;i<mExampleList.size();i++){
-            if(!mExampleList.get(i).getItemContext().isEmpty() || mExampleList.get(i).getItemImageUri() !=null)
-                cnt++;
-        }
-        return cnt;
+        return mExampleList.size();
     }
 
     public static class VoteViewHolder extends RecyclerView.ViewHolder{

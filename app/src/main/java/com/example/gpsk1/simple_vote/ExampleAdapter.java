@@ -46,12 +46,20 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull final ExampleViewHolder holder, final int position) {
         ExampleItem currentItem = mExampleList.get(position);
-        holder.editText.setText(mExampleList.get(position).getItemContext());
-        holder.idText.setText(String.valueOf(mExampleList.get(position).getId()));
+        if(mExampleList.get(position).getItemContext() != null) {
+            holder.editText.setText(mExampleList.get(position).getItemContext());
+        }else if(position<=2)
+            holder.editText.setHint("항목 입력");
+
         if(mExampleList.get(position).getItemImageUri() != null) {
             Uri uri = Uri.parse(mExampleList.get(position).getItemImageUri());
             holder.imageButton.setImageURI(uri);
+        }else if(position<=2) {
+            Log.i("bbbb","chk");
+            holder.imageButton.setImageResource(R.drawable.selectimage);
         }
+
+        holder.idText.setText(String.valueOf(mExampleList.get(position).getId()));
     }
 
     @Override
@@ -93,9 +101,16 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                 @Override
                 public void onClick(View v) {
                     PICK_FROM_ALBUM = Integer.parseInt(String.valueOf(idText.getText()));
-                    Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                    ((Activity)mContext).startActivityForResult(intent,PICK_FROM_ALBUM);
+                    if(mExampleList.get(PICK_FROM_ALBUM).getItemImageUri() != null){
+                        //이미지 삭제
+                        mExampleList.get(PICK_FROM_ALBUM).setItemImageUri(null);
+                        imageButton.setImageResource(R.drawable.selectimage);
+                    }
+                    else {
+                        Intent intent = new Intent(Intent.ACTION_PICK);
+                        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                        ((Activity) mContext).startActivityForResult(intent, PICK_FROM_ALBUM);
+                    }
                 }
             });
 

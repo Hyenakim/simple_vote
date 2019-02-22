@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ExampleItem> mExampleList;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter; //브릿지 역할 (뷰 <-> 데이터)
+    private RecyclerView.Adapter mVoteAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button addList;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckedTextView anonymous;
     private CheckedTextView permitadd;
 
-    private int id=3;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +73,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void insertItem(int position){
-        mExampleList.add(position, new ExampleItem(id++));
+        id = mExampleList.size();
+        mExampleList.add(position, new ExampleItem(id));
         mAdapter.notifyItemInserted(position);
+        mVoteAdapter.notifyItemInserted(position);
     }
     public void createExampleList() {
         mExampleList = new ArrayList<>();
         mExampleList.add(new ExampleItem(0));
         mExampleList.add(new ExampleItem(1));
-        mExampleList.add(new ExampleItem(2));
     }
 
     public void buildRecyclerView() {
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ExampleAdapter(mExampleList);
-
+        mVoteAdapter = new VoteAdapter(mExampleList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -101,10 +103,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         //이미지 저장
-        Log.i(TAG, String.valueOf(requestCode));
+        Log.i("main",String.valueOf(requestCode));
         mExampleList.get(requestCode).setItemImageUri(data.getData().toString());
         //이미지 받아서 띄우기
         mAdapter.notifyDataSetChanged();
-
+        mVoteAdapter.notifyDataSetChanged();
     }
 }
