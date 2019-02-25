@@ -23,12 +23,11 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
     public VoteAdapter(ArrayList<ExampleItem> exampleList){
         mExampleList = exampleList;
         mAdapter = new ExampleAdapter(mExampleList);
-        if(mExampleList.size() > 2) {
+        if(mExampleList.size() > 2) { //투표 항목이 2개 이상은 유지돼야함
             for (int i = 0; i < mExampleList.size(); i++) {
-                if (mExampleList.get(i).getItemContext() == null
-                        && mExampleList.get(i).getItemImageUri() == null) {
+                if (mExampleList.get(i).getItemContext().isEmpty()
+                        && String.valueOf(mExampleList.get(i).getItemImageUri()) == "null") {
                     mExampleList.remove(i);
-                    i--;
                     for(int j=i;j<mExampleList.size();j++){
                         mExampleList.get(j).setId(mExampleList.get(j).getId()-1);
                     }
@@ -70,6 +69,5 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
             button= itemView.findViewById(R.id.item_context);
             image = itemView.findViewById(R.id.item_img);
         }
-
     }
 }

@@ -46,19 +46,20 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull final ExampleViewHolder holder, final int position) {
         ExampleItem currentItem = mExampleList.get(position);
+
         if(mExampleList.get(position).getItemContext() != null) {
             holder.editText.setText(mExampleList.get(position).getItemContext());
-        }else if(position<=2)
+        }else {
             holder.editText.setHint("항목 입력");
-
+            holder.editText.setText(null);
+        }
         if(mExampleList.get(position).getItemImageUri() != null) {
             Uri uri = Uri.parse(mExampleList.get(position).getItemImageUri());
             holder.imageButton.setImageURI(uri);
-        }else if(position<=2) {
-            Log.i("bbbb","chk");
+        }else {
             holder.imageButton.setImageResource(R.drawable.selectimage);
+            holder.imageButton.setImageURI(null);
         }
-
         holder.idText.setText(String.valueOf(mExampleList.get(position).getId()));
     }
 
@@ -88,7 +89,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                     mExampleList.get(getAdapterPosition()).setItemContext(editText.getText().toString());
                 }
                 @Override

@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
         Log.i("main",String.valueOf(requestCode));
         mExampleList.get(requestCode).setItemImageUri(data.getData().toString());
         //이미지 받아서 띄우기
+
+        //mAdapter.notifyDataSetChanged();
+        //mVoteAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mAdapter.notifyDataSetChanged();
         mVoteAdapter.notifyDataSetChanged();
     }
