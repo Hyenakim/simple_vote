@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckedTextView permitadd;
 
     private int id;
+    private boolean check[];
+    private int checkDrawable[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         title = findViewById(R.id.vote_title);
         finish = findViewById(R.id.vote_finish);
         addList = findViewById(R.id.add_context);
+        time = findViewById(R.id.vote_time);
+        multi = findViewById(R.id.vote_multi);
+        anonymous = findViewById(R.id.vote_anonymous);
+        permitadd = findViewById(R.id.vote_permitAdd);
+        check = new boolean[4];
+        checkDrawable = new int[2];
+        checkDrawable[0] = R.drawable.selectoption;
+        checkDrawable[1] = R.drawable.selectedoption;
 
         finish.setOnClickListener(new View.OnClickListener(){
 
@@ -69,7 +79,66 @@ public class MainActivity extends AppCompatActivity {
                 insertItem(position);
             }
         });
-
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckedTextView view = (CheckedTextView)v;
+                view.toggle();
+                if(check[0]==false)
+                    check[0] = true;
+                else
+                    check[0] = false;
+                if(view.isChecked() && check[0]==true)
+                    time.setCheckMarkDrawable(checkDrawable[1]);
+                else if(!view.isChecked() && check[0]==false)
+                    time.setCheckMarkDrawable(checkDrawable[0]);
+            }
+        });
+        multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckedTextView view = (CheckedTextView)v;
+                view.toggle();
+                if(check[1]==false)
+                    check[1] = true;
+                else
+                    check[1] = false;
+                if(view.isChecked() && check[1]==true)
+                    multi.setCheckMarkDrawable(checkDrawable[1]);
+                else if(!view.isChecked() && check[1]==false)
+                    multi.setCheckMarkDrawable(checkDrawable[0]);
+            }
+        });
+        anonymous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckedTextView view = (CheckedTextView)v;
+                view.toggle();
+                if(check[2]==false)
+                    check[2] = true;
+                else
+                    check[2] = false;
+                if(view.isChecked() && check[2]==true)
+                    anonymous.setCheckMarkDrawable(checkDrawable[1]);
+                else if(!view.isChecked() && check[2]==false)
+                    anonymous.setCheckMarkDrawable(checkDrawable[0]);
+            }
+        });
+        permitadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckedTextView view = (CheckedTextView)v;
+                view.toggle();
+                if(check[3]==false)
+                    check[3] = true;
+                else
+                    check[3] = false;
+                if(view.isChecked() && check[3]==true)
+                    permitadd.setCheckMarkDrawable(checkDrawable[1]);
+                else if(!view.isChecked() && check[3]==false)
+                    permitadd.setCheckMarkDrawable(checkDrawable[0]);
+            }
+        });
     }
 
     public void insertItem(int position){
@@ -106,9 +175,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i("main",String.valueOf(requestCode));
         mExampleList.get(requestCode).setItemImageUri(data.getData().toString());
         //이미지 받아서 띄우기
-
-        //mAdapter.notifyDataSetChanged();
-        //mVoteAdapter.notifyDataSetChanged();
     }
 
     @Override
