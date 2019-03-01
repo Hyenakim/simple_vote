@@ -15,29 +15,33 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private EditText title;
 
-    private Button finish;
-    private RadioButton text;
-    private RadioButton date;
+    @BindView(R.id.vote_title) EditText title;
+    @BindView(R.id.vote_finish) Button finish;
+    @BindView(R.id.select_vote_type) RadioGroup group;
+    @BindView(R.id.vote_text) RadioButton text;
+    @BindView(R.id.vote_date) RadioButton date;
+    @BindView(R.id.add_context) Button addList;
+    @BindView(R.id.vote_time) CheckedTextView time;
+    @BindView(R.id.vote_multi) CheckedTextView multi;
+    @BindView(R.id.vote_anonymous) CheckedTextView anonymous;
+    @BindView(R.id.vote_permitAdd) CheckedTextView permitadd;
 
     private ArrayList<ExampleItem> mExampleList;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter; //브릿지 역할 (뷰 <-> 데이터)
     private RecyclerView.Adapter mVoteAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Button addList;
-
-    private CheckedTextView time;
-    private CheckedTextView multi;
-    private CheckedTextView anonymous;
-    private CheckedTextView permitadd;
 
     private int id;
     private boolean check[];
@@ -50,13 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         createExampleList();
         buildRecyclerView();
-        title = findViewById(R.id.vote_title);
-        finish = findViewById(R.id.vote_finish);
-        addList = findViewById(R.id.add_context);
-        time = findViewById(R.id.vote_time);
-        multi = findViewById(R.id.vote_multi);
-        anonymous = findViewById(R.id.vote_anonymous);
-        permitadd = findViewById(R.id.vote_permitAdd);
+        ButterKnife.bind(this);
+
         check = new boolean[4];
         checkDrawable = new int[2];
         checkDrawable[0] = R.drawable.selectoption;
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 insertItem(position);
             }
         });
+
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
