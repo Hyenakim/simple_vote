@@ -24,9 +24,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
-    @BindView(R.id.vote_title) EditText title;
+    //private static final String TAG = "MainActivity";
+/*    @BindView(R.id.vote_title) EditText title;
     @BindView(R.id.vote_finish) Button finish;
     @BindView(R.id.select_vote_type) RadioGroup group;
     @BindView(R.id.vote_text) RadioButton text;
@@ -35,7 +34,17 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.vote_time) CheckedTextView time;
     @BindView(R.id.vote_multi) CheckedTextView multi;
     @BindView(R.id.vote_anonymous) CheckedTextView anonymous;
-    @BindView(R.id.vote_permitAdd) CheckedTextView permitadd;
+    @BindView(R.id.vote_permitAdd) CheckedTextView permitadd;*/
+    private EditText title;
+    private Button finish;
+    private RadioGroup group;
+    private RadioButton text;
+    private RadioButton date;
+    private Button addList;
+    private CheckedTextView time;
+    private CheckedTextView multi;
+    private CheckedTextView anonymous;
+    private CheckedTextView permitadd;
 
     private ArrayList<ExampleItem> mExampleList;
     private RecyclerView mRecyclerView;
@@ -46,15 +55,25 @@ public class MainActivity extends AppCompatActivity {
     private int id;
     private boolean check[];
     private int checkDrawable[];
-
+    private boolean dateFlag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //ButterKnife.bind(this);
+        title = findViewById(R.id.vote_title);
+        finish = findViewById(R.id.vote_finish);
+        group = findViewById(R.id.select_vote_type);
+        text = findViewById(R.id.vote_text);
+        date = findViewById(R.id.vote_date);
+        addList = findViewById(R.id.add_context);
+        time = findViewById(R.id.vote_time);
+        multi = findViewById(R.id.vote_multi);
+        anonymous = findViewById(R.id.vote_anonymous);
+        permitadd = findViewById(R.id.vote_permitAdd);
 
         createExampleList();
-        ButterKnife.bind(this);
-
+        buildRecyclerView(true);
         check = new boolean[4];
         checkDrawable = new int[2];
         checkDrawable[0] = R.drawable.selectoption;
@@ -65,10 +84,13 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.vote_text:
-                        buildRecyclerView(true);
+                        if(dateFlag)
+                            buildRecyclerView(true);
+                        dateFlag = false;
                         break;
                     case R.id.vote_date:
                         buildRecyclerView(false);
+                        dateFlag = true;
                         break;
                 }
             }
@@ -197,5 +219,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         mAdapter.notifyDataSetChanged();
         mVoteAdapter.notifyDataSetChanged();
+
     }
 }

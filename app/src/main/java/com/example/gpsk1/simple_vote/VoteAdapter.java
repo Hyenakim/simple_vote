@@ -22,7 +22,7 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.VoteViewHolder
 
     public VoteAdapter(ArrayList<ExampleItem> exampleList){
         mExampleList = exampleList;
-        mAdapter = new ExampleAdapter(mExampleList);
+        mAdapter = new ExampleAdapter(mExampleList,false);
         if(mExampleList.size() > 2) { //투표 항목이 2개 이상은 유지돼야함
             for (int i = 0; i < mExampleList.size(); i++) {
                 if (mExampleList.get(i).getItemContext().isEmpty()

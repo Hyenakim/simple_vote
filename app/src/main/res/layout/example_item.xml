@@ -19,6 +19,7 @@
             android:theme="@style/EditTextStyle"
             android:layout_gravity="center"
             style="@style/EditTextStyle"
+            android:focusable="false"
             android:hint="항목 입력"/>
         <ImageButton
             android:id="@+id/input_image"

@@ -2,6 +2,7 @@ package com.example.gpsk1.simple_vote;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,13 +17,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
@@ -33,9 +38,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public static Context mContext;
     public static boolean isText;
 
-    public ExampleAdapter(ArrayList<ExampleItem> exampleList,boolean isText){
+    public ExampleAdapter(ArrayList<ExampleItem> exampleList,boolean isTextFlag){
         mExampleList = exampleList;
-        this.isText = isText;
+        isText = isTextFlag;
     }
     @NonNull
     @Override
@@ -76,6 +81,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ImageButton imageButton;
         public EditText editText;
         public TextView idText;
+        final Calendar myCalendar = Calendar.getInstance();
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
@@ -83,21 +89,43 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             imageButton = itemView.findViewById(R.id.input_image);
             idText = itemView.findViewById(R.id.input_id);
 
-            editText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            if(isText) {
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                }
+                    }
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    mExampleList.get(getAdapterPosition()).setItemContext(editText.getText().toString());
-                }
-                @Override
-                public void afterTextChanged(Editable s) {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        mExampleList.get(getAdapterPosition()).setItemContext(editText.getText().toString());
+                    }
 
-                }
-            });
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+            }
+            else {
+                final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, month);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel();
+                    }
+                };
+                editText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new DatePickerDialog((Activity) mContext, dateListener, myCalendar
+                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+            }
             imageButton.setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -116,6 +144,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                 }
             });
 
+        }
+        private void updateLabel(){
+            String myFormat = "MM/dd/yy";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+            editText.setText(sdf.format(myCalendar.getTime()));
         }
 
     }
