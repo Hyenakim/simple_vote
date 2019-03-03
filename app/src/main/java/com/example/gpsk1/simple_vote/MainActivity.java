@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createExampleList();
-        buildRecyclerView();
         ButterKnife.bind(this);
 
         check = new boolean[4];
@@ -61,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
         checkDrawable[0] = R.drawable.selectoption;
         checkDrawable[1] = R.drawable.selectedoption;
 
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.vote_text:
+                        buildRecyclerView(true);
+                        break;
+                    case R.id.vote_date:
+                        buildRecyclerView(false);
+                        break;
+                }
+            }
+        });
         finish.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -153,11 +165,14 @@ public class MainActivity extends AppCompatActivity {
         mExampleList.add(new ExampleItem(1));
     }
 
-    public void buildRecyclerView() {
+    public void buildRecyclerView(boolean isText) {
         mRecyclerView = findViewById(R.id.vote_context);
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ExampleAdapter(mExampleList);
+        if(isText)
+            mAdapter = new ExampleAdapter(mExampleList,isText);
+        else
+            mAdapter = new ExampleAdapter(mExampleList,isText);
         mVoteAdapter = new VoteAdapter(mExampleList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);

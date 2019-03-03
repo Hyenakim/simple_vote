@@ -31,9 +31,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public static ArrayList<ExampleItem> mExampleList;
     private static int PICK_FROM_ALBUM = 0;
     public static Context mContext;
+    public static boolean isText;
 
-    public ExampleAdapter(ArrayList<ExampleItem> exampleList){
+    public ExampleAdapter(ArrayList<ExampleItem> exampleList,boolean isText){
         mExampleList = exampleList;
+        this.isText = isText;
     }
     @NonNull
     @Override
